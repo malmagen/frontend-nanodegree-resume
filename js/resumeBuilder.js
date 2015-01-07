@@ -28,7 +28,7 @@ var work = {
             "employer": "Klarna",
             "title": "Team leader -B2B marketing",
             "location": "Stockholm",
-            "dates": "2008-2012",
+            "dates": "2010-2012",
             "description": "lorem ipsum dolor sit amet"
         },
         {
@@ -45,21 +45,26 @@ var education = {
 	"schools": [
 	{
 		"name": "Uppsala University",
-		"city": "Uppsala",
-		"degree": ["Masters", "BA"]
+		"location": "Uppsala",
+		"degree": "Masters",
+		"dates": "2004-2010",
+		"major": "Engineering"
 
 	},
 	{
 		"name": "University of New South Wales",
-		"city": "Sydney",
-		"degree": ["BA"]
+		"location": "Sydney",
+		"degree": "BA",
+		"dates": "2007-2008",
+		"major": "Finance"
 	}
 	],
 	"onlineCourses":[
 		{
-			"title": ["HTML/CSS", "Javascripts Basics"],
-			"school": "Udacity"
-
+			"title": ["A Beginner's Guide to Irrational Behavior"],
+			"school": "Coursera: Duke University",
+			"date": "2014",
+			"url":"https://www.coursera.org/course/behavioralecon"
 		}
 
 	]
@@ -74,6 +79,10 @@ var education = {
 			"image":["images/fry.jpg"]
 		}
 		]
+	}
+
+	var map = {
+
 	}
 
 if(bio.skills.length > 0 ){
@@ -117,18 +126,37 @@ projects.display = function() {
 }
 
 education.display = function() {
-	for(var project in projects.projects){
-	
-		$("#projects").append(HTMLprojectStart);
-		var formattedTitle = HTMLprojectTitle.replace("%data%",projects.projects[project].title);
-		var formattedDates = HTMLprojectDates.replace("%data%",projects.projects[project].dates);
-		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
-		var formattedPicture = HTMLprojectImage.replace("%data%",projects.projects[project].image[0]);
+	$("#education").append(HTMLschoolStart);
+	for(var school in education.schools){
+			
+			var formattedschoolName = HTMLschoolName.replace("%data%", education.schools[school].name);
+			var formattedschoolDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
+			var formattedschoolDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+			var formattedschoolLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location); 
+			var formattedschoolMajor = HTMLschoolMajor.replace("%data%", education.schools[school].major);
 
-		var formattedProject = formattedTitle + formattedDates + formattedDescription;
-		$(".project-entry:last").append(formattedProject);
-		$(".project-entry:last").append(formattedPicture);
+			var formattedSchool = formattedschoolName + formattedschoolDegree + formattedschoolDates + formattedschoolLocation + formattedschoolMajor;
+			$(".education-entry:last").append(formattedSchool);
+		}
+
+	$(".education-entry:last").append(HTMLonlineClasses);
+	for(var onlineclass in education.onlineCourses){
+		
+		var formattedonlineTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[onlineclass].title);
+		var formattedonlineSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[onlineclass].school);		
+		var formattedonlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[onlineclass].date);
+		var formattedonlineURL =  HTMLonlineURL.replace("%data%", education.onlineCourses[onlineclass].url);
+		var formattedOnline = formattedonlineTitle+formattedonlineSchool+formattedonlineDates+formattedonlineURL;
+		$(".education-entry:last").append(formattedOnline);
 	}
+			
+
+			
+}
+
+map.display = function() {
+	console.log("kartan visas inte")
+	$("#map").append(googleMap);
 }
 
 
@@ -178,6 +206,8 @@ work.display();
 $("#main").append(education.name);
 $("#main").append(internationalizeButton);
 projects.display();
+education.display();
+map.display();
 
 
 
