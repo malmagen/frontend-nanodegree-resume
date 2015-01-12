@@ -81,9 +81,6 @@ var education = {
 		]
 	}
 
-	var map = {
-
-	}
 
 if(bio.skills.length > 0 ){
 	$("#header").append(HTMLskillsStart);
@@ -154,11 +151,6 @@ education.display = function() {
 			
 }
 
-map.display = function() {
-	console.log("kartan visas inte")
-	$("#map").append(googleMap);
-}
-
 
 $(document).click(function(loc){
 var x = loc.pageX;
@@ -207,7 +199,7 @@ $("#main").append(education.name);
 $("#main").append(internationalizeButton);
 projects.display();
 education.display();
-map.display();
+$("#mapDiv").append(googleMap);
 
 
 
