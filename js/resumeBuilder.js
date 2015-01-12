@@ -11,12 +11,15 @@ var bio = {
         "mobile": "0735118388",
         "github": "malmagen",
         "twitter": "malmagen",
-        "location": "stockholm"
+        "location": "Stockholm"
     },
     "welcomeMessage": "lorem ipsum dolor sit amet",
     "skills": [
         "Habit design",
-        "fast learner"
+        "Strength training",
+        "HTML"
+        "CSS"
+        "Javascript"
     ],
     "biopic": "images/WP-FP.jpg"
 }
@@ -81,20 +84,31 @@ var education = {
 		]
 	}
 
-	var map = {
-
+bio.display = function(){
+	var formattedName = HTMLheaderName.replace("%data%",bio["name"]);
+	var formattedRole = HTMLheaderRole.replace("%data%", "web developer");
+	var formattedPic = HTMLbioPic.replace("%data%",bio["biopic"]);
+	var formattedWelcomeMsg = HTMLWelcomeMsg.replace("%data%",bio["welcomeMessage"])
+		for (contact in bio.contacts) {
+			formattedContact = HTMLcontactGeneric.replace("%contact%", contact);
+			formattedContact = formattedContact.replace("%data%", bio.contacts[contact]);
+			$("#topContacts").append(formattedContact);
+			$("#footerContacts").append(formattedContact);
 	}
-
-if(bio.skills.length > 0 ){
 	$("#header").append(HTMLskillsStart);
 	for(var i = 0; i < bio.skills.length;i++){
 	var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
 	$("#skills").append(formattedSkills);	
 	}	
+
+	$("#header").append(formattedWelcomeMsg);
+	$("#header").prepend(formattedPic);
+	$("#header").prepend(formattedRole);
+	$("#header").prepend(formattedName);
+	
 }
-	else{
-		console.log("you need to add some skills");
-	}
+
+
 work.display = function (){
 for(var job in work.jobs){
 	$("#workExperience").append(HTMLworkStart);
@@ -154,10 +168,9 @@ education.display = function() {
 			
 }
 
-map.display = function() {
-	console.log("kartan visas inte")
-	$("#map").append(googleMap);
-}
+
+	
+
 
 
 $(document).click(function(loc){
@@ -175,39 +188,19 @@ function inName(full_name){
 
 
 
-
-
-bio.contactDisplay = function () {
-	for (contact in bio.contacts) {
-		formattedContact = HTMLcontactGeneric.replace("%contact%", contact);
-		formattedContact = formattedContact.replace("%data%", bio.contacts[contact]);
-		$("#topContacts").append(formattedContact);
-		$("#footerContacts").append(formattedContact);
-	}
-}
-
-
 inName("Fredrik Persson");
 
-var formattedName = HTMLheaderName.replace("%data%",bio["name"]);
-var formattedRole = HTMLheaderRole.replace("%data%", "web developer");
-var formattedPic = HTMLbioPic.replace("%data%",bio["biopic"]);
-var formattedWelcomeMsg = HTMLWelcomeMsg.replace("%data%",bio["welcomeMessage"])
+
 //var formattedMobile = HTMLmobile.replace("%data%", bio["contacts"]["mobile"]);
 //var formattedContactGeneric = HTMLcontactGeneric.replace("%data%","test");
 console.log(projects.projects[0].title)
-$("#header").append(formattedWelcomeMsg);
-$("#header").prepend(formattedPic);
-bio.contactDisplay();
-//contactsDisplay();
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
+bio.display();
 work.display();
 $("#main").append(education.name);
 $("#main").append(internationalizeButton);
 projects.display();
 education.display();
-map.display();
+//$("#mapDiv").append(googleMap);
 
 
 
