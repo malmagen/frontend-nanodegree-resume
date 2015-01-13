@@ -81,29 +81,44 @@ var education = {
 		]
 	}
 
-bio.display = functino(){
+bio.display = function(){
 var formattedName = HTMLheaderName.replace("%data%",bio["name"]);
 var formattedRole = HTMLheaderRole.replace("%data%", "web developer");
 var formattedPic = HTMLbioPic.replace("%data%",bio["biopic"]);
 var formattedWelcomeMsg = HTMLWelcomeMsg.replace("%data%",bio["welcomeMessage"])
 
+
+for (contact in bio.contacts) {
+	formattedContact = HTMLcontactGeneric.replace("%contact%", contact);
+	formattedContact = formattedContact.replace("%data%", bio.contacts[contact]);
+	$("#topContacts").append(formattedContact);
+	$("#footerContacts").append(formattedContact);
+}
 $("#header").append(formattedWelcomeMsg);
-$("#header").prepend(formattedPic);
+
 $("#header").prepend(formattedRole);
 $("#header").prepend(formattedName);
-
-}
-
-if(bio.skills.length > 0 ){
-	$("#header").append(HTMLskillsStart);
-	for(var i = 0; i < bio.skills.length;i++){
-	var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+$("#header").prepend(formattedPic);
+$("#header").append(HTMLskillsStart);
+for(var i = 0; i < bio.skills.length;i++){
+    console.log("test")
+    var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
 	$("#skills").append(formattedSkills);	
 	}	
+
+
 }
-	else{
-		console.log("you need to add some skills");
-	}
+
+//if(bio.skills.length > 0 ){
+//	$("#header").append(HTMLskillsStart);
+//	for(var i = 0; i < bio.skills.length;i++){
+//	var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+//	$("#skills").append(formattedSkills);	
+//	}	
+//}
+//	else{
+//		console.log("you need to add some skills");
+//	}
 work.display = function (){
 for(var job in work.jobs){
 	$("#workExperience").append(HTMLworkStart);
@@ -181,14 +196,14 @@ function inName(full_name){
 
 
 
-bio.contactDisplay = function () {
-	for (contact in bio.contacts) {
-		formattedContact = HTMLcontactGeneric.replace("%contact%", contact);
-		formattedContact = formattedContact.replace("%data%", bio.contacts[contact]);
-		$("#topContacts").append(formattedContact);
-		$("#footerContacts").append(formattedContact);
-	}
-}
+//bio.contactDisplay = function () {
+//	for (contact in bio.contacts) {
+//		formattedContact = HTMLcontactGeneric.replace("%contact%", contact);
+//		formattedContact = formattedContact.replace("%data%", bio.contacts[contact]);
+//		$("#topContacts").append(formattedContact);
+//		$("#footerContacts").append(formattedContact);
+//	}
+//}
 
 
 inName("Fredrik Persson");
@@ -197,8 +212,8 @@ inName("Fredrik Persson");
 //var formattedMobile = HTMLmobile.replace("%data%", bio["contacts"]["mobile"]);
 //var formattedContactGeneric = HTMLcontactGeneric.replace("%data%","test");
 console.log(projects.projects[0].title)
-
-bio.contactDisplay();
+bio.display();
+//bio.contactDisplay();
 //contactsDisplay();
 
 work.display();
