@@ -81,6 +81,18 @@ var education = {
 		]
 	}
 
+bio.display = functino(){
+var formattedName = HTMLheaderName.replace("%data%",bio["name"]);
+var formattedRole = HTMLheaderRole.replace("%data%", "web developer");
+var formattedPic = HTMLbioPic.replace("%data%",bio["biopic"]);
+var formattedWelcomeMsg = HTMLWelcomeMsg.replace("%data%",bio["welcomeMessage"])
+
+$("#header").append(formattedWelcomeMsg);
+$("#header").prepend(formattedPic);
+$("#header").prepend(formattedRole);
+$("#header").prepend(formattedName);
+
+}
 
 if(bio.skills.length > 0 ){
 	$("#header").append(HTMLskillsStart);
@@ -181,19 +193,14 @@ bio.contactDisplay = function () {
 
 inName("Fredrik Persson");
 
-var formattedName = HTMLheaderName.replace("%data%",bio["name"]);
-var formattedRole = HTMLheaderRole.replace("%data%", "web developer");
-var formattedPic = HTMLbioPic.replace("%data%",bio["biopic"]);
-var formattedWelcomeMsg = HTMLWelcomeMsg.replace("%data%",bio["welcomeMessage"])
+
 //var formattedMobile = HTMLmobile.replace("%data%", bio["contacts"]["mobile"]);
 //var formattedContactGeneric = HTMLcontactGeneric.replace("%data%","test");
 console.log(projects.projects[0].title)
-$("#header").append(formattedWelcomeMsg);
-$("#header").prepend(formattedPic);
+
 bio.contactDisplay();
 //contactsDisplay();
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
+
 work.display();
 $("#main").append(education.name);
 $("#main").append(internationalizeButton);
