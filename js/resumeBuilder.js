@@ -122,6 +122,99 @@ var education = {
 
 
 //when called will replace the data in the helper.js file with my bio data and add the information to the site
+var model = {}
+var octopus = {
+	init: function(){
+
+	}
+
+}
+
+
+var view ={
+	render_bio: function(){
+		var skills;
+
+		/*Display Bio */
+		$("#header").append(formattedWelcomeMsg);
+		$("#header").prepend(formattedRole);
+		$("#header").prepend(formattedName);
+		$("#header").prepend(formattedPic);
+		$("#header").append(HTMLskillsStart);
+
+		for(var i = 0; i < bio.skills.length;i++){
+			var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+			$("#skills").append(formattedSkills);
+	}
+	/*Display job */
+	},
+
+
+	render_work: function(){
+		for(var job in work.jobs){
+			$("#workExperience").append(HTMLworkStart);
+			var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+			var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+			var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+			var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+			var formattedDescription = HTMLworkDescription.replace("%data%",work.jobs[job].description);
+
+			var formattedEmployerTitle = formattedEmployer + formattedTitle + formattedLocation+formattedDates+formattedDescription;
+
+			$(".work-entry:last").append(formattedEmployerTitle);
+		}
+	},
+
+	render_projects: function(){
+		for(var project in projects.projects){
+
+		$("#projects").append(HTMLprojectStart);
+		var formattedTitle = HTMLprojectTitle.replace("%data%",projects.projects[project].title);
+		var formattedDates = HTMLprojectDates.replace("%data%",projects.projects[project].dates);
+		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+		var formattedPicture = "";
+		for(var i = 0; i < projects.projects[project].image.length;i++){
+			var formattedPicture = formattedPicture + HTMLprojectImage.replace("%data%",projects.projects[project].image[i]);
+	    }
+		var formattedProject = formattedTitle + formattedDates + formattedDescription;
+		$(".project-entry:last").append(formattedProject);
+		$(".project-entry:last").append(formattedPicture);
+	}
+
+	},
+
+	render_education: function(){
+		$("#education").append(HTMLschoolStart);
+
+		for(var school in education.schools){
+
+				var formattedschoolName = HTMLschoolName.replace("%data%", education.schools[school].name);
+				var formattedschoolDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
+				var formattedschoolDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+				var formattedschoolLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
+				var formattedschoolMajor = HTMLschoolMajor.replace("%data%", education.schools[school].major);
+
+				var formattedSchool = formattedschoolName + formattedschoolDegree + formattedschoolDates + formattedschoolLocation + formattedschoolMajor;
+				$(".education-entry:last").append(formattedSchool);
+			}
+
+		$(".education-entry:last").append(HTMLonlineClasses);
+		for(var onlineclass in education.onlineCourses){
+
+			var formattedonlineTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[onlineclass].title);
+			var formattedonlineSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[onlineclass].school);
+			var formattedonlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[onlineclass].date);
+			var formattedonlineURL =  HTMLonlineURL.replace("%data%", education.onlineCourses[onlineclass].url);
+			var formattedOnline = formattedonlineTitle+formattedonlineSchool+formattedonlineDates+formattedonlineURL;
+			$(".education-entry:last").append(formattedOnline);
+	}
+	}
+
+}
+
+
+
+
 bio.display = function(){
 var formattedName = HTMLheaderName.replace("%data%",bio["name"]);
 var formattedRole = HTMLheaderRole.replace("%data%", "web developer");
@@ -231,7 +324,7 @@ projects.display();
 education.display();
 
 //add a google map to the site, which take the location parameters and display it on the site.
-$("#mapDiv").append(googleMap);
+//$("#mapDiv").append(googleMap);
 
 
 
